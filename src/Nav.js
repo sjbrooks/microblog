@@ -7,8 +7,10 @@ function Nav() {
     <div className="Nav">
       <h1>Microblog</h1>
       <h3>Get into the Rithm of blogging!</h3>
-      <NavLink to="">Blog</NavLink>
-      <NavLink to="/new">Add New Post</NavLink>
+      <div>
+        <NavLink to="">Blog</NavLink>
+        <NavLink to="/new">Add New Post</NavLink>
+      </div>
     </div>
   );
 }
