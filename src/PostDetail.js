@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './PostDetail.css';
 import { useParams, Redirect } from 'react-router-dom';
 import PostForm from './PostForm';
+import CommentsList from '../CommentsList';
 
 
-function PostDetail({ idToPost, deletePost, updatePost }) {
+function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteComment }) {
 
   // TODO: onEdit for icons as a funciton to re-render form component at same URL
   //       onDelete should redirect to Welcome 
@@ -31,6 +32,7 @@ function PostDetail({ idToPost, deletePost, updatePost }) {
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p>{body}</p>
+      <CommentsList id={id} addComment={addComment} deleteComment={deleteComment}/>
     </div>
   );
 }

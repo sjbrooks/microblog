@@ -27,6 +27,17 @@ function App() {
     setIdToPost(idToPostCopy);
     history.push('/');
   }
+  
+  const addComment = (id, comment) => {
+    let idToPostCopy = {...idToPost, [id]: {...idToPost[id], comments: [...idToPost[id].comments, comment]} };
+    setIdToPost(idToPostCopy);
+  }
+  
+  const deleteComment = (id, comment) => {
+    let idToPostCopy = {...idToPost, [id]: {...idToPost[id], comments: [...idToPost[id].comments, comment]} };
+    setIdToPost(idToPostCopy);
+  }
+
 
   return (
     <div className="App">
@@ -35,7 +46,10 @@ function App() {
         idToPost={idToPost} 
         addPost={addPost} 
         updatePost={updatePost} 
-        deletePost={deletePost} />
+        deletePost={deletePost}
+        addComment={addComment} 
+        deleteComment={deleteComment} 
+        />
     </div>
   );
 }

@@ -13,7 +13,7 @@ import PostDetail from './PostDetail';
  *    - Used in App
  *    - Uses PostList, NewPostForm, PostDetail */
 
-function Routes({ addPost, updatePost, idToPost, deletePost }) {
+function Routes({ addPost, updatePost, idToPost, deletePost, addComment, deleteComment }) {
   return (
     <Switch>
       <Route exact path="/">
@@ -31,7 +31,10 @@ function Routes({ addPost, updatePost, idToPost, deletePost }) {
         <PostDetail 
           idToPost={idToPost} 
           updatePost={updatePost} 
-          deletePost={deletePost}/>
+          deletePost={deletePost}
+          addComment={addComment}
+          deleteComment={deleteComment}
+          />
       </Route>
 
       <Redirect to="/" />
