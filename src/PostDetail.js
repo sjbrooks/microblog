@@ -30,7 +30,7 @@ function PostDetail({ idToPost, deletePost, updatePost }) {
   return (
     <div className="PostDetail">
       <button className="btn btn-primary" onClick={() => setIsEditing(true)}><i className="fas fa-external-link-alt fa-lg"></i></button>
-      <i className="fas fa-trash-alt fa-lg" onClick={deletePost}></i>
+      <i className="fas fa-trash-alt fa-lg" onClick={() => deletePost(id)}></i>
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p>{body}</p>

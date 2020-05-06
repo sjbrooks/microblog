@@ -33,13 +33,17 @@ const handleSubmit = evt => {
   evt.preventDefault();
   const newFormData = {
     ...formData,
-    key: uuid()
+    key: id ? id : uuid()
   }
 
   if (id) {
-    updatePost(id, newFormData);
+    console.log(`\n\n\n The value of id inside handleSubmit in PostForm is `, id, '\n\n\n');
+    console.log("About to update post")
+    updatePost(newFormData);
   } else {
-    addPost(newFormData.key, newFormData);  // TODO create this to add to PostList 
+    console.log("About to add post");
+    console.log(`\n\n\n The value of newFormData is `, newFormData, '\n\n\n');
+    addPost(newFormData);  // TODO create this to add to PostList 
   }
 
   // anticipating redux

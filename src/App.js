@@ -9,16 +9,29 @@ function App() {
   const [idToPost, setIdToPost] = useState({});
   const history = useHistory();
 
-  const addPost = (id, post) => {
-    let idToPostCopy = { ...idToPost, [id]: post };
-    setIdToPost(idToPostCopy);
+  const addPost = async (postData) => {
+    console.log(`\n\n\n The value of postData inside addPost is `, postData, '\n\n\n');
+    const { title, description, body } = postData;
+    let newPost = { title, description, body };
+
+    console.log(`\n\n\n The value of newPost is `, newPost, '\n\n\n');
+    console.log(`\n\n\n The value of postData.key inside addPost is `, postData.key, '\n\n\n');
+    
+    let idToPostCopy = { ...idToPost, [postData.key]: newPost };
+    console.log(`\n\n\n The value of idToPostCopy inside addPost is `, idToPostCopy, '\n\n\n');
+    await setIdToPost(idToPostCopy);
+
+    console.log(`\n\n\n The value of idToPost inside App in addPost is `, idToPost, '\n\n\n');
     history.push('/');
   }
 
-  const updatePost = (id, updatedPost) => {
-    console.log(`\n\n\n The value of id inside updatePost is `, id, '\n\n\n');
+  const updatePost = (updatedPostData) => {
+    const { title, description, body } = updatedPostData;
+    let updatedPost = { title, description, body };
+
     console.log(`\n\n\n The value of updatedPost inside updatePost is `, updatedPost, '\n\n\n');
-    let idToPostCopy = { ...idToPost, [id]: updatedPost }
+    let idToPostCopy = { ...idToPost, [updatedPostData.key]: updatedPost }
+
     console.log(`\n\n\n The value of idToPostCopy inside updatePost is `, idToPostCopy, '\n\n\n');
     setIdToPost(idToPostCopy);
     history.push('/');
