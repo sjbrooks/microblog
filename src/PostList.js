@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './PostList.css';
 import PostCard from './PostCard';
 
-function PostList({ posts }) {
-  const [postsList, setPostsList] = useState([]]);
+function PostList() {
 
   // TODO: anticipate using REDUX store to get all posts so we don't have to pass down posts prop later
 
-  const postCards = posts.map(({ key, title, description }) => (
+  const postCards = postsList.map(({ key, title, description }) => (
     <PostCard key={key} title={title} description={description}></PostCard>
   ))
 

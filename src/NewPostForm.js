@@ -37,24 +37,32 @@ function NewPostForm({ addPost }) {
     <div className="NewPostForm">
       <form onSubmit={handleSubmit}>
 
-        <label htmlFor="title"></label>
-        <input name="title"
-          value={formData.title}
-          placeholder="title"
-          onChange={handleChange}></input>
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
+          <input name="title"
+            value={formData.title}
+            onChange={handleChange}>
+          </input>
+        </div>
 
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <input name="description"
+            value={formData.description}
+            onChange={handleChange}>
+          </input>
+        </div>
 
-        <label htmlFor="description"></label>
-        <input name="description"
-          value={formData.description}
-          placeholder="description"
-          onChange={handleChange}></input>
+        <div className="form-group">
+          <label htmlFor="body">Body</label>
+          <textarea name="body"
+            value={formData.body}
+            onChange={handleChange}
+            rows="6"
+            cols="45">
+          </textarea>
+        </div>
 
-        <label htmlFor="body"></label>
-        <input name="body"
-          value={formData.body}
-          placeholder="body"
-          onChange={handleChange}></input>
 
         <button>Save</button>
         <button>Cancel</button>
