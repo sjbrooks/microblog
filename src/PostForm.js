@@ -33,8 +33,10 @@ const handleSubmit = evt => {
   evt.preventDefault();
   const newFormData = {
     ...formData,
-    key: uuid()
+    key: id ? id : uuid()
   }
+
+  // QUESTION: how can we avoid having key as the object's id, as well as a key inside the object (for rendering PostCard with a correct link?)
 
   if (id) {
     updatePost(id, newFormData);

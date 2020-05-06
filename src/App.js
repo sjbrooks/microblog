@@ -16,10 +16,7 @@ function App() {
   }
 
   const updatePost = (id, updatedPost) => {
-    console.log(`\n\n\n The value of id inside updatePost is `, id, '\n\n\n');
-    console.log(`\n\n\n The value of updatedPost inside updatePost is `, updatedPost, '\n\n\n');
     let idToPostCopy = { ...idToPost, [id]: updatedPost }
-    console.log(`\n\n\n The value of idToPostCopy inside updatePost is `, idToPostCopy, '\n\n\n');
     setIdToPost(idToPostCopy);
     history.push('/');
   }

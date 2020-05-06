@@ -13,9 +13,6 @@ function PostDetail({ idToPost, deletePost, updatePost }) {
   const [isEditing, setIsEditing] = useState(false);
   const post = idToPost[id];
 
-  console.log(`\n\n\n The value of id inside PostDetail is `, id, '\n\n\n');
-  console.log(`\n\n\n The value of post inside PostDetail is `, post, '\n\n\n');
-
   if (!post) {
     console.log("You are being redirected to home from PostDetail")
     return <Redirect to="/" />
@@ -30,7 +27,7 @@ function PostDetail({ idToPost, deletePost, updatePost }) {
   return (
     <div className="PostDetail">
       <button className="btn btn-primary" onClick={() => setIsEditing(true)}><i className="fas fa-external-link-alt fa-lg"></i></button>
-      <i className="fas fa-trash-alt fa-lg" onClick={deletePost}></i>
+      <button className="btn btn-danger" onClick={() => deletePost(id)}> <i className="fas fa-trash-alt fa-lg"></i></button>
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p>{body}</p>
