@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './NewPostForm.css';
 import { v4 as uuid } from "uuid";
 
+// TODO: for Edit funcitoning: will have to make a request and populate fields with 
+// the post data upon render, based on postID
 
 function NewPostForm({ addPost }) {
   const INITIAL_STATE = { title: "", description: "", body: "" };
