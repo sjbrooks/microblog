@@ -2,13 +2,20 @@ import React from 'react';
 import './PostList.css';
 import PostCard from './PostCard';
 
-function PostList() {
+function PostList({ idToPost }) {
 
   // TODO: anticipate using REDUX store to get all posts so we don't have to pass down posts prop later
 
-  const postCards = postsList.map(({ key, title, description }) => (
-    <PostCard key={key} title={title} description={description}></PostCard>
+  let postsList = Object.keys(idToPost).map(id => idToPost[id]);
+ 
+  const postCards = postsList.map(({ title, description, key }) => (
+    <PostCard 
+      key={key} 
+      id={key}
+      title={title} 
+      description={description}></PostCard>
   ))
+
 
   return (
     <div className="PostList">

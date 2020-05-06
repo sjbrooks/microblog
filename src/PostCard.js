@@ -2,11 +2,12 @@ import React from 'react';
 import './PostCard.css';
 import { Link } from "react-router-dom";
 
-function PostCard({ key, title, description }) {
+function PostCard({ id, title, description }) {
+
   return (
-    <div className="PostCard" id={key}>
-      <h3><Link to={`/${key}`}>{title}</Link></h3>
-      <p>{description}</p>
+    <div className="PostCard" id={id}>
+      <h5><Link to={`/${id}`}>{title}</Link></h5>
+      <p><i>{description}</i></p>
     </div>
   );
 }
