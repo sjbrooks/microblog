@@ -1,15 +1,16 @@
 import React from "react";
+import './Comment.css';
 
-function Comment({comment, deleteComment, id}) {
+function Comment({comment, deleteComment, postId, commentId}) {
 
   function handleRemove(){
-    deleteComment(id)
+    deleteComment(postId, commentId);
   }
 
   return (
-    <div>
-      <button className="btn btn-danger" onClick={handleRemove}><b>X</b></button>
-      <li className="Comment">{comment}</li>
+    <div className="Comment">
+      <button className="Comment-button btn btn-danger py-0 px-2" onClick={handleRemove}><b>x</b></button>
+      <li className="Comment-list-item">{comment}</li>
     </div>
   );
 }

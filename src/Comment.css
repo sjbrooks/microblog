@@ -1,0 +1,7 @@
+.Comment {
+  list-style: none;
+}
+
+.Comment-button, .Comment-list-item {
+  display: inline-block;
+}

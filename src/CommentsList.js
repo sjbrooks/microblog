@@ -8,8 +8,9 @@ function CommentsList({ idToPost, postId, deleteComment }) {
 
   const commentComponents = commentIds.map(id => (
     <Comment
+      postId={postId}
       key={id}
-      id={id}
+      commentId={id}
       comment={idToComment[id]}
       deleteComment={deleteComment}
     />
