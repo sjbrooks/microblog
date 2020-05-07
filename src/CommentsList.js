@@ -1,6 +1,12 @@
 import React from "react";
 import Comment from "./Comment";
 
+/** CommentsList: Component that renders each comment component
+ *    - Holds props of idToPost, postId, deleteComment
+ *    - Used in PostDetail component
+ *    - Uses Comment component
+ */
+
 function CommentsList({ idToPost, postId, deleteComment }) {
 
   const idToComment = idToPost[postId].comments;

@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 
+/** Index: Component that renders the App component, wrapped in the BrowserRouter */
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

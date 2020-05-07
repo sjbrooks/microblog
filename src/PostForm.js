@@ -4,6 +4,12 @@ import { v4 as uuid } from "uuid";
 import { useParams, Link } from 'react-router-dom';
 
 
+/** PostForm: Component that renders a form to add or update a post 
+ * (based on existance of a valid id from params)
+ *    - Holds state of formdata
+ *    - Holds props of addPost, idToPost, and updatePost
+ *    - Used in PostDetail and Routes components
+ */
 
 function PostForm({ addPost, idToPost, updatePost }) {
 
@@ -11,13 +17,14 @@ function PostForm({ addPost, idToPost, updatePost }) {
 
   const { id } = useParams();
 
-  // if post id exists, reset INITIAL_STATE to existing values from the post
+  // if post already exists, grab values from the post to populate the form
   if (id) {
     const { title, description, body } = idToPost[id];
     INITIAL_STATE = { title, description, body };
   }
 
-  const [formData, setFormData] = useState({ ...INITIAL_STATE });  // QUESTION: heard spreading this OBJ is a good idea, what are the pros?
+  const [formData, setFormData] = useState({ ...INITIAL_STATE });  
+  // QUESTION: heard spreading this OBJ is a good idea, what are the pros?
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -26,6 +33,8 @@ function PostForm({ addPost, idToPost, updatePost }) {
       [name]: value
     }));
   }
+
+  // handles the submit differently if this form is for an existing post
   const handleSubmit = evt => {
     evt.preventDefault();
     const newFormData = {
@@ -34,19 +43,12 @@ function PostForm({ addPost, idToPost, updatePost }) {
       comments: id ? {...idToPost[id].comments} : {}
     }
 
-    // QUESTION: how can we avoid having key as the object's id, as well as a key inside the object (for rendering PostCard with a correct link?)
-
     if (id) {
       updatePost(id, newFormData);
     } else {
       addPost(newFormData.key, newFormData); 
     }
 
-    // anticipating redux
-    //   dispatch({
-    //     type: "TBD",
-    //     payload: newFormData
-    //  })
     setFormData({ ...INITIAL_STATE });
   }
 

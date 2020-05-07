@@ -1,6 +1,10 @@
 import React from "react";
 import './Comment.css';
 
+/** Comment: Component that renders each list item comment inside CommentsList component
+ *    - Holds props of comment, deleteComment, postId, and commentId
+ */
+
 function Comment({comment, deleteComment, postId, commentId}) {
 
   function handleRemove(){

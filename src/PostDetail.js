@@ -6,16 +6,20 @@ import CommentsList from './CommentsList';
 import CommentForm from './CommentForm';
 
 
-function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteComment }) {
+/** PostDetail: Component that renders the detailed page for each post, including the title, description, body
+ *  as well as any comments for that post, and a form to add new posts
+ *    - Holds props of idToPost, deletePost, updatePost, addComment, deleteComment
+ *    - Used in Routes components
+ *    - Uses PostForm, CommentsList, and CommentForm components
+ */
 
-  console.log(`\n\n\n The value of idToPost inside PostDetail is `, idToPost, '\n\n\n');
+function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteComment }) {
 
   const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const post = idToPost[id];
 
   if (!post) {
-    console.log("You are being redirected to home from PostDetail")
     return <Redirect to="/" />
   }
 

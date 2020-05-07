@@ -2,9 +2,13 @@ import React from 'react';
 import './PostList.css';
 import PostCard from './PostCard';
 
-function PostList({ idToPost }) {
+/** PostList: Component that renders a welcome message and a list of posts
+ *    - Holds prop of idToPost
+ *    - Used in Routes component
+ *    - Uses PostCard component
+ */
 
-  // TODO: anticipate using REDUX store to get all posts so we don't have to pass down posts prop later
+function PostList({ idToPost }) {
 
   let postsList = Object.keys(idToPost).map(id => idToPost[id]);
  

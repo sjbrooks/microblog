@@ -2,6 +2,11 @@ import React from 'react';
 import './Nav.css';
 import { NavLink } from 'react-router-dom';
 
+
+/** Nav: Component that renders the navbar, with links to go back to the main blog page or to add a new post
+ *    - Used in App component
+ */
+
 function Nav() {
   return (
     <div className="Nav">
