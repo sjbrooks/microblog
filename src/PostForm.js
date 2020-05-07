@@ -42,14 +42,14 @@ function PostForm({ addPost, idToPost, updatePost }) {
       ...formData,
 
       // rename this to id or commentId vs. postId to be more explicit throughout
-      key: id ? id : uuid(),
-      comments: id ? {...idToPost[id].comments} : {}
+      postId: id ? id : uuid(),
+      // comments: id ? {...idToPost[id].comments} : {}
     }
 
     if (id) {
       updatePost(id, newFormData);
     } else {
-      addPost(newFormData.key, newFormData); 
+      addPost(newFormData.postId, newFormData); 
     }
 
     setFormData({ ...INITIAL_STATE });

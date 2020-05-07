@@ -8,15 +8,15 @@ import PostCard from './PostCard';
  *    - Uses PostCard component
  */
 
-function PostList({ idToPost }) {
-
+function PostList() {
+  //useSelector for idToPost
   let postsList = Object.keys(idToPost).map(id => idToPost[id]);
- 
-  const postCards = postsList.map(({ title, description, key }) => (
-    <PostCard 
-      key={key} 
-      id={key}
-      title={title} 
+
+  const postCards = postsList.map(({ title, description, postId }) => (
+    <PostCard
+      key={postId}
+      postId={postId}
+      title={title}
       description={description}></PostCard>
   ))
 

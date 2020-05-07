@@ -18,6 +18,7 @@ function App() {
   const addPost = (id, post) => {
     // TODO: spread and delete the id key from formdata
     let idToPostCopy = { ...idToPost, [id]: post };
+    delete idToPostCopy[id].postId
     setIdToPost(idToPostCopy);
     history.push('/');
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import Comment from "./Comment";
 
 /** CommentsList: Component that renders each comment component
  *    - Holds props of idToPost, postId, deleteComment
@@ -7,10 +6,10 @@ import Comment from "./Comment";
  *    - Uses Comment component
  */
 
-function CommentsList({ idToPost, postId, handleRemove }) {
+function CommentsList({ idToComment, postId, handleRemove }) {
 
-  const idToComment = idToPost[postId].comments;
-  const commentIds = Object.keys(idToComment);
+  // const idToComment = idToPost[postId].comments; 
+  const commentIds = Object.keys(idToComment[postId]);
 
   const commentComponents = commentIds.map(id => (
     <div className="Comment" key={id}>
