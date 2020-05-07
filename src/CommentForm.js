@@ -27,7 +27,7 @@ function CommentForm({ postId, addComment }) {
       ...formData,
 
       // TODO: reconsider name here as well
-      key: uuid()
+      commentId: uuid()
     }
 
     addComment(postId, newFormData);

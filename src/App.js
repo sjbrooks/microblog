@@ -36,12 +36,18 @@ function App() {
   }
 
 
-  const addComment = (postId, comment) => {
-
-    // QUESTION: Would it be better to have a separate object that holds keys of postId and values of the comments object?
-    // Also, would it be better practice to assume comments would be smaller and more manageable, meaning we should use an array so we can ensure the order is maintained? For that, it would need to be an array of objects so that we could find the specific comment by id
-
-    // easier to update if we do separate these out
+  const addComment = (postId, data) => {
+/**
+ *  QUESTION: Would it be better to have a separate object 
+ * that holds keys of postId and values of the comments object?
+    Also, would it be better practice to assume comments would be
+    smaller and more manageable, meaning we should use an array so 
+    we can ensure the order is maintained ? For that, it 
+    would need to be an array of objects so that we could find the 
+    specific comment by id
+    easier to update if we do separate these out
+ */
+   
 
     let idToPostCopy = {
       ...idToPost, [postId]:
@@ -49,7 +55,7 @@ function App() {
         ...idToPost[postId],
         comments: {
           ...idToPost[postId].comments,
-          [comment.key]: comment.comment
+          [data.commentId]: data.comment
         }
       }
     };
