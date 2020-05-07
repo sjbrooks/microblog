@@ -31,7 +31,7 @@ function PostForm({ addPost, idToPost, updatePost }) {
     const newFormData = {
       ...formData,
       key: id ? id : uuid(),
-      comments: {}
+      comments: id ? {...idToPost[id].comments} : {}
     }
 
     // QUESTION: how can we avoid having key as the object's id, as well as a key inside the object (for rendering PostCard with a correct link?)
