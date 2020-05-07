@@ -3,11 +3,14 @@ import Comment from "./Comment";
 
 function CommentsList({ idToPost, postId, deleteComment }) {
 
-  const commentComponents = idToPost[postId].comments.map(({comment, key}) => (
+  const idToComment = idToPost[postId].comments;
+  const commentIds = Object.keys(idToComment);
+
+  const commentComponents = commentIds.map(id => (
     <Comment
-      key={key}
-      id={key}
-      comment={comment}
+      key={id}
+      id={id}
+      comment={idToComment[id]}
       deleteComment={deleteComment}
     />
   ));

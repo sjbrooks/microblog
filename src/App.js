@@ -37,35 +37,36 @@ function App() {
       ...idToPost, [postId]:
       {
         ...idToPost[postId],
-        comments: [...idToPost[postId].comments,
-        { [comment.key]: comment.comment }
-        ]
+        comments: {
+          ...idToPost[postId].comments,
+          [comment.key]: comment.comment
+        }
       }
     };
-    console.log(`\n\n\n The value of comments inside idToPostCopy in addComment is `, idToPostCopy[postId].comments, '\n\n\n');
-    setIdToPost(idToPostCopy);
+console.log(`\n\n\n The value of comments inside idToPostCopy in addComment is `, idToPostCopy[postId].comments, '\n\n\n');
+setIdToPost(idToPostCopy);
   }
 
-  const deleteComment = (id, comment) => {
-    // need to update
-    // let idToPostCopy = {...idToPost, [id]: {...idToPost[id], comments: [...idToPost[id].comments, comment]} };
-    // setIdToPost(idToPostCopy);
-  }
+const deleteComment = (id, comment) => {
+  // need to update
+  // let idToPostCopy = {...idToPost, [id]: {...idToPost[id], comments: [...idToPost[id].comments, comment]} };
+  // setIdToPost(idToPostCopy);
+}
 
 
-  return (
-    <div className="App">
-      <Nav />
-      <Routes
-        idToPost={idToPost}
-        addPost={addPost}
-        updatePost={updatePost}
-        deletePost={deletePost}
-        addComment={addComment}
-        deleteComment={deleteComment}
-      />
-    </div>
-  );
+return (
+  <div className="App">
+    <Nav />
+    <Routes
+      idToPost={idToPost}
+      addPost={addPost}
+      updatePost={updatePost}
+      deletePost={deletePost}
+      addComment={addComment}
+      deleteComment={deleteComment}
+    />
+  </div>
+);
 }
 
 export default App;
