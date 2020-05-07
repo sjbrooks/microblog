@@ -28,14 +28,21 @@ function App() {
     history.push('/');
   }
   
-  const addComment = (id, comment) => {
-    let idToPostCopy = {...idToPost, [id]: {...idToPost[id], comments: [...idToPost[id].comments, comment]} };
+  const addComment = (postId, comment) => {
+    let idToPostCopy = {...idToPost, [postId]: 
+                                      {...idToPost[postId], 
+                                        comments: [...idToPost[postId].comments, 
+                                                  { [comment.id]: comment.comment } 
+                                                  ] 
+                                      } 
+                        };
     setIdToPost(idToPostCopy);
   }
   
   const deleteComment = (id, comment) => {
-    let idToPostCopy = {...idToPost, [id]: {...idToPost[id], comments: [...idToPost[id].comments, comment]} };
-    setIdToPost(idToPostCopy);
+    // need to update
+    // let idToPostCopy = {...idToPost, [id]: {...idToPost[id], comments: [...idToPost[id].comments, comment]} };
+    // setIdToPost(idToPostCopy);
   }
 
 

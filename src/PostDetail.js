@@ -3,6 +3,7 @@ import './PostDetail.css';
 import { useParams, Redirect } from 'react-router-dom';
 import PostForm from './PostForm';
 import CommentsList from '../CommentsList';
+import CommentForm from './CommentForm';
 
 
 function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteComment }) {
@@ -32,7 +33,8 @@ function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteCommen
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p>{body}</p>
-      <CommentsList id={id} addComment={addComment} deleteComment={deleteComment}/>
+      <CommentsList idToPost={idToPost} id={id} deleteComment={deleteComment}/>
+      <CommentForm addComment={addComment}/>
     </div>
   );
 }
