@@ -3,7 +3,7 @@ import './NewPostForm.css';
 import { v4 as uuid } from "uuid";
 
 
-function CommentForm({ addComment }) {
+function CommentForm({ postId, addComment }) {
 
   let INITIAL_STATE = ({ comment: "" });
 
@@ -23,7 +23,7 @@ const handleSubmit = evt => {
     key: uuid()
   }
 
-  addComment(newFormData);
+  addComment(postId, newFormData);
 
   setFormData({ ...INITIAL_STATE });
 }

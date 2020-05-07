@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import './PostDetail.css';
 import { useParams, Redirect } from 'react-router-dom';
 import PostForm from './PostForm';
-import CommentsList from '../CommentsList';
+import CommentsList from './CommentsList';
 import CommentForm from './CommentForm';
 
 
 function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteComment }) {
 
-  // TODO: onEdit for icons as a funciton to re-render form component at same URL
-  //       onDelete should redirect to Welcome 
+  console.log(`\n\n\n The value of idToPost inside PostDetail is `, idToPost, '\n\n\n');
 
   const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
@@ -33,8 +32,8 @@ function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteCommen
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
       <p>{body}</p>
-      <CommentsList idToPost={idToPost} id={id} deleteComment={deleteComment}/>
-      <CommentForm addComment={addComment}/>
+      <CommentsList idToPost={idToPost} postId={id} deleteComment={deleteComment}/>
+      <CommentForm postId={id} addComment={addComment}/>
     </div>
   );
 }

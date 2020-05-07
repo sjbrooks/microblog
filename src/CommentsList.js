@@ -1,9 +1,9 @@
 import React from "react";
 import Comment from "./Comment";
 
-function CommentsList({ idToPost, id, deleteComment }) {
+function CommentsList({ idToPost, postId, deleteComment }) {
 
-  const commentComponents = idToPost[id].comments.map(({comment, key}) => (
+  const commentComponents = idToPost[postId].comments.map(({comment, key}) => (
     <Comment
       key={key}
       id={key}
