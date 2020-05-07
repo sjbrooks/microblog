@@ -23,8 +23,9 @@ function PostForm({ addPost, idToPost, updatePost }) {
     INITIAL_STATE = { title, description, body };
   }
 
-  const [formData, setFormData] = useState({ ...INITIAL_STATE });  
-  // QUESTION: heard spreading this OBJ is a good idea, what are the pros?
+  const [formData, setFormData] = useState({...INITIAL_STATE });  
+  // QUESTION: heard spreading this OBJ is a good idea, what are the pros? 
+  // If that component gets unmounted and mounted again, we wouldn't get the same reference..
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -39,6 +40,8 @@ function PostForm({ addPost, idToPost, updatePost }) {
     evt.preventDefault();
     const newFormData = {
       ...formData,
+
+      // rename this to id or commentId vs. postId to be more explicit throughout
       key: id ? id : uuid(),
       comments: id ? {...idToPost[id].comments} : {}
     }
