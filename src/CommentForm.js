@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './NewPostForm.css';
+import './CommentForm.css';
 import { v4 as uuid } from "uuid";
 
 
@@ -30,18 +30,16 @@ const handleSubmit = evt => {
 
 
 return (
-  <div className="NewPostForm">
+  <div className="CommentForm">
     <form onSubmit={handleSubmit}>
 
-      <div className="form-group">
-        <label htmlFor="comment">Comment</label>
+        <label className="CommentForm-label" htmlFor="comment">Comment</label>
         <input name="comment"
           value={formData.comment}
           onChange={handleChange}>
         </input>
-      </div>
 
-      <button className="btn btn-primary">add</button>
+      <button className="CommentForm-button btn btn-primary py-1">add</button>
     </form>
   </div>
 );

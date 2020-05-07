@@ -1,0 +1,18 @@
+.Nav {
+  background-color: #ddd;
+  height: 10rem;
+}
+
+.Nav h1 {
+  font-size: 3rem;
+  font-weight: 200;
+}
+
+.Nav-NavLink {
+  margin: 2rem; 
+}
+
+.Nav-contents {
+  position: relative;
+  top: 1rem;
+}

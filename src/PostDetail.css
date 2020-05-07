@@ -1,0 +1,12 @@
+.PostDetail {
+  position: relative;
+  top: 3rem;
+}
+
+.PostDetail-body {
+  padding: 2rem;
+}
+
+.PostDetail-button {
+  margin: 0.5rem;
+}

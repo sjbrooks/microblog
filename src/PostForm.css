@@ -1,0 +1,26 @@
+.PostForm {
+  position: relative;
+  right: 4rem;
+  top: 2rem;
+}
+
+.PostForm-label, .PostForm-label-body {
+  width: 10rem;
+  text-align: right;
+  margin-right: 0.5rem;
+}
+
+.PostForm-input {
+  width: 24rem;
+}
+
+.PostForm-label-body {
+  position: relative;
+  bottom: 5rem;
+}
+
+.Postform-button {
+  margin: 1rem;
+  position: relative;
+  left: 4rem;
+}

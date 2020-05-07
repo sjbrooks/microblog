@@ -27,11 +27,11 @@ function PostDetail({ idToPost, deletePost, updatePost, addComment, deleteCommen
 
   return (
     <div className="PostDetail">
-      <button className="btn btn-primary py-0 px-1" onClick={() => setIsEditing(true)}><i className="fas fa-external-link-alt fa-sm"></i></button>
-      <button className="btn btn-danger py-0 px-1" onClick={() => deletePost(id)}> <i className="fas fa-trash-alt fa-sm"></i></button>
+      <button className="PostDetail-button btn btn-primary py-0 px-1" onClick={() => setIsEditing(true)}><i className="fas fa-external-link-alt fa-sm"></i></button>
+      <button className="PostDetail-button btn btn-danger py-0 px-1" onClick={() => deletePost(id)}> <i className="fas fa-trash-alt fa-sm"></i></button>
       <h2>{title}</h2>
       <h6><i>{description}</i></h6>
-      <p>{body}</p>
+      <p className="PostDetail-body border-bottom">{body}</p>
       <CommentsList idToPost={idToPost} postId={id} deleteComment={deleteComment}/>
       <CommentForm postId={id} addComment={addComment}/>
     </div>

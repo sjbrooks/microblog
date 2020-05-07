@@ -6,7 +6,6 @@ function Welcome() {
     <div className="Welcome">
       <h3>＿φ(°-°=)</h3>
       <p>Welcome to Microblog!</p>
-
     </div>
   );
 }

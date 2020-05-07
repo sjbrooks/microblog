@@ -5,11 +5,13 @@ import { NavLink } from 'react-router-dom';
 function Nav() {
   return (
     <div className="Nav">
-      <h1>Microblog</h1>
-      <h3>Get into the Rithm of blogging!</h3>
-      <div>
-        <NavLink to="">Blog</NavLink>
-        <NavLink to="/new">Add New Post</NavLink>
+      <div className="Nav-contents">
+        <h1>Microblog</h1>
+        <h4>Get into the Rithm of blogging.</h4>
+        <div>
+          <NavLink className="Nav-NavLink" to="">Blog</NavLink>
+          <NavLink className="Nav-NavLink" to="/new">Add new post</NavLink>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,12 @@
 .Comment {
   list-style: none;
+  position: relative;
+  left: 40%;
+  text-align: left;
+}
+
+.Comment-list-item {
+  margin: 1rem;
 }
 
 .Comment-button, .Comment-list-item {
