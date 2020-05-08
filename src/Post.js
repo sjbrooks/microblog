@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PostDetail from "./PostDetail";
 import CommentsList from './CommentsList';
 import CommentForm from './CommentForm';
@@ -11,7 +11,7 @@ import {
   deleteCommentFromAPI,
   updatePostToAPI
 } from './actionCreators';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 
 /** */
@@ -23,21 +23,51 @@ deletePost,
 addComment,
 deleteComment (in handleRemove)**/
 
-const dispatch = useDispatch();
 
-function Post({ idToPost }) {
+function Post() {
   const { id } = useParams();
+  const postId = Number(id);
+
+  const post = useSelector(st => st.idToPost[postId], shallowEqual);
+  const error = useSelector(st => st.error);
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const post = idToPost[id];
+  
 
-  if (!post) {
-    return <Redirect to="/" />
+  /** Grab the post object from the API if we don't have it in store already */
+
+  useEffect(function loadPostIfNotInStore() {
+    async function getPost() {
+      dispatch(fetchPostFromAPI(postId));
+    }
+    if (!post) {
+      getPost();
+    }
+  }, [dispatch, postId, post]);
+
+
+  /** Toggle isEditing  */
+
+  /** Handle post editing  */
+  // this is where we would invoke toggle edit
+
+  /** Handle post deletion */
+
+  /** Handle comment adding */
+
+  /** Handle comment deletion */
+
+  // MOVE THIS LOGIC CLOSER TO RETURN
+  // if (isEditing) {
+  //   return <PostForm idToPost={idToPost} updatePostToAPI={updatePostToAPI} />
+  // }
+
+  if (error) {
+    // inspect? and then redirect to home and once home, render any error.message then clear error state
+    return <h1>There was an error handling your request. Please try again later...</h1>;
   }
 
-  if (isEditing) {
-    return <PostForm idToPost={idToPost} updatePostToAPI={updatePostToAPI} />
-  }
-
+  // use this destructuring inside the handling functions above
   const { title, description, body } = post;
 
 
@@ -46,6 +76,10 @@ function Post({ idToPost }) {
   // function handleRemove() {
   //   deleteCommentFromAPI(commentId, postId);
   // }
+
+  if (!post) {
+    return <h1>Loading...</h1>
+   }
 
   return (
     <div>

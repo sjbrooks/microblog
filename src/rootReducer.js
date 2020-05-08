@@ -37,8 +37,8 @@ function rootReducer(state = DEFAULT_STATE, action) {
         }
       }
 
-    case ERROR:
-      return {}
+    case 'ERROR':
+      return { ...state, error: true };
 
     case ADD_POST:
       let reformattedNewPost = { ...action.newPost };
@@ -103,10 +103,10 @@ function rootReducer(state = DEFAULT_STATE, action) {
       };
 
     case DELETE_COMMENT:
-      let postCommentsCopy = {...state.idToPost[action.postId].idToComment};
+      let postCommentsCopy = { ...state.idToPost[action.postId].idToComment };
       delete postCommentsCopy[action.commentId];
       // to return to see if we need to spread out everything or just directly change this one thing
-      return {...state, [state.idToPost[action.postId].idToComment]: postCommentsCopy };
+      return { ...state, [state.idToPost[action.postId].idToComment]: postCommentsCopy };
 
     default:
       return state
