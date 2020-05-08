@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './PostForm.css';
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 import { useParams, Link } from 'react-router-dom';
 
 
@@ -41,9 +41,8 @@ function PostForm({ addPost, idToPost, updatePost }) {
     const newFormData = {
       ...formData,
 
-      // rename this to id or commentId vs. postId to be more explicit throughout
-      postId: id ? id : uuid(),
-      // comments: id ? {...idToPost[id].comments} : {}
+      // postId: id ? id : uuid(),
+      idToComment: id ? {...idToPost[id].idToComment} : {}
     }
 
     if (id) {
