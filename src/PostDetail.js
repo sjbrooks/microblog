@@ -13,7 +13,7 @@ import PostForm from './PostForm';
  *    - Uses PostForm, CommentsList, and CommentForm components
  */
 
-function PostDetail({ /**idToPost,updatePost, addComment, deleteComment,**/ deletePost,  setIsEditing }) {
+function PostDetail({ /**idToPost,updatePost, addComment, deleteComment,**/ deletePost,  setIsEditing , post}) {
 
   // const { id } = useParams();
   // const [isEditing, setIsEditing] = useState(false);
@@ -27,7 +27,7 @@ function PostDetail({ /**idToPost,updatePost, addComment, deleteComment,**/ dele
   //   return <PostForm idToPost={idToPost} updatePost={updatePost}/>
   // }
 
-  // const {title, description, body} = post;
+  const {id, title, description, body} = post;
 
   return (
     <div className="PostDetail">

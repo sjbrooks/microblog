@@ -11,7 +11,7 @@ import { useParams, Link } from 'react-router-dom';
  *    - Used in PostDetail and Routes components
  */
 
-function PostForm({ addPost, idToPost, updatePost }) {
+function PostForm({ addPost, post, updatePost }) {
 
   let INITIAL_STATE = { title: "", description: "", body: "" };
 
@@ -19,7 +19,7 @@ function PostForm({ addPost, idToPost, updatePost }) {
 
   // if post already exists, grab values from the post to populate the form
   if (id) {
-    const { title, description, body } = idToPost[id];
+    const { title, description, body } = post;
     INITIAL_STATE = { title, description, body };
   }
 
@@ -42,13 +42,13 @@ function PostForm({ addPost, idToPost, updatePost }) {
       ...formData,
 
       // postId: id ? id : uuid(),
-      idToComment: id ? {...idToPost[id].idToComment} : {}
+      idToComment: id ? {...post.idToComment} : {}
     }
 
     if (id) {
-      updatePost(id, newFormData);
+      updatePost(newFormData, id);
     } else {
-      addPost(newFormData.postId, newFormData); 
+      addPost(/** newFormData.postId,*/ newFormData); // kept in case new post fails...
     }
 
     setFormData({ ...INITIAL_STATE });

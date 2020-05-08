@@ -8,7 +8,7 @@ import './CommentForm.css';
  *    - Used in PostDetail component
  */
 
-function CommentForm({ postId, addComment }) {
+function CommentForm({ addComment }) {
 
   let INITIAL_STATE = ({ comment: "" });
 
@@ -23,14 +23,11 @@ function CommentForm({ postId, addComment }) {
   }
   const handleSubmit = evt => {
     evt.preventDefault();
-    const newFormData = {
+    const newComment = {
       ...formData,
-
-      // TODO: reconsider name here as well
-      // commentId: uuid()
     }
 
-    addComment(postId, newFormData);
+    addComment(newComment);
 
     setFormData({ ...INITIAL_STATE });
   }

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './PostList.css';
 import PostCard from './PostCard';
+import { useDispatch, useSelector, shallowEqual} from 'react-redux';
+import { fetchTitlesFromAPI } from './actionCreators';
+
 
 /** PostList: Component that renders a welcome message and a list of posts
  *    - Holds prop of idToPost
@@ -9,6 +12,34 @@ import PostCard from './PostCard';
  */
 
 function PostList() {
+  const titleList = useSelector(st => st.titles, shallowEqual)
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
+
+  // Work in Progress...
+
+/**function TitleList() {
+  const titles = useSelector(st => st.titles);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(function() {
+    async function fetchTitle() {
+      await dispatch(fetchTitlesFromAPI());
+      setIsLoading(false);
+    }
+    if (isLoading) {
+      fetchTitle();
+    }
+  }, [dispatch, isLoading]); */
+
+  useEffect(function () {
+    async function getTitles() { 
+      dispatch(fetchTitlesFromAPI());
+    }
+    
+  })
+
   //useSelector for idToPost
   let postsList = Object.keys(idToPost).map(id => idToPost[id]);
 

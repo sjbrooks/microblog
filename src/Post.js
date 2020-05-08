@@ -3,7 +3,7 @@ import PostDetail from "./PostDetail";
 import CommentsList from './CommentsList';
 import CommentForm from './CommentForm';
 import PostForm from './PostForm';
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 import {
   fetchPostFromAPI,
   deletePostFromAPI,
@@ -30,7 +30,10 @@ function Post() {
 
   const post = useSelector(st => st.idToPost[postId], shallowEqual);
   const error = useSelector(st => st.error);
+
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const [isEditing, setIsEditing] = useState(false);
   
 
@@ -46,21 +49,33 @@ function Post() {
   }, [dispatch, postId, post]);
 
 
-  /** Toggle isEditing  */
+/** Toggle isEditing  */
+  function toggleIsEditting() { 
+    setIsEditing(isEditing => !isEditing);
+  }
 
   /** Handle post editing  */
   // this is where we would invoke toggle edit
+  function updatePost(postData, postId) { 
+    dispatch(updatePostToAPI(postData, postId));
+    toggleIsEditting();
+  }
 
-  /** Handle post deletion */
+/** Handle post deletion */
+  function deletePost(postId){
+    dispatch(deletePostFromAPI(postId));
+    history.push('/');
+  }
 
   /** Handle comment adding */
+  function addComment(newComment, postId) { 
+    dispatch(createCommentToAPI(newComment, postId));
+  }
 
-  /** Handle comment deletion */
-
-  // MOVE THIS LOGIC CLOSER TO RETURN
-  // if (isEditing) {
-  //   return <PostForm idToPost={idToPost} updatePostToAPI={updatePostToAPI} />
-  // }
+/** Handle comment deletion */
+  function deleteComment(commentId, postId) { 
+    dispatch(deleteCommentFromAPI(commentId, postId));
+  }
 
   if (error) {
     // inspect? and then redirect to home and once home, render any error.message then clear error state
@@ -68,7 +83,7 @@ function Post() {
   }
 
   // use this destructuring inside the handling functions above
-  const { title, description, body } = post;
+  // const { title, description, body } = post;
 
 
   // TODO: we can make a function higher up that 
@@ -81,15 +96,20 @@ function Post() {
     return <h1>Loading...</h1>
    }
 
+    if (isEditing) {
+    return <PostForm post={post} updatePost={updatePost} />
+  }
+  
   return (
     <div>
+      
       <PostDetail
-        fetchPostFromAPI={fetchPostFromAPI}
-        deletePostFromAPI={deletePostFromAPI}
-        updatePostToAPI={updatePostToAPI}
+        post={post}
+        deletePost={deletePost}
+        updatePost={updatePost}
         setIsEditing={setIsEditing} />
-      <CommentsList idToPost={idToPost} postId={id} deleteCommentFromAPI={deleteCommentFromAPI} />
-      <CommentForm postId={id} createCommentToAPI={createCommentToAPI} />
+      <CommentsList idToComment={post.idToComment} post={post} deleteComment={deleteComment} />
+      <CommentForm addComment={addComment} />
     </div>
   )
 }
