@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   FETCH_POST,
-  FETCH_POSTS,
+  FETCH_TITLES,
   ERROR,
   ADD_POST,
   UPDATE_POST,
@@ -11,8 +11,7 @@ import {
   DELETE_COMMENT
 } from './actionTypes';
 
-const API_URL_POST = 'http://localhost:5000/api/posts';
-const API_URL_COMMENT = 'http://localhost:5000/api/comments';
+const API_BASE_URL = 'http://localhost:5000/api/posts';
 
 // helper function from Medium to convert Arrays of Objects into an Object
 // https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
@@ -23,10 +22,10 @@ const arrayToObject = (array) =>
     return obj
   }, {})
 
-function fetchPosts(idToPost) {
+function fetchTitles(titles) {
   return {
-    type: FETCH_POSTS,
-    idToPost
+    type: FETCH_TITLES,
+    titles
   };
 }
 
@@ -51,44 +50,53 @@ function handleError(error) {
   };
 }
 
-function addPost(post) {
+function addPost(newPost) {
   return {
     type: ADD_POST,
-    post
+    newPost
   };
 }
 
-function updatePost(updatedPost) {
+function updatePost(updatedPost, postId) {
   return {
     type: UPDATE_POST,
-    updatedPost
+    updatedPost,
+    postId
   }
 }
 
 
-function deletePost(id) {
+function deletePost(postId) {
   return {
     type: DELETE_POST,
-    id
+    postId
   }
 }
 
-function getComments(newComment) {
+function addComment(newComment, postId) {
   return {
     type: ADD_COMMENT,
-    newComment
+    newComment,
+    postId
+  }
+}
+
+function deleteComment(commentId, postId) {
+  return {
+    type: DELETE_COMMENT,
+    commentId,
+    postId
   }
 }
 
 
-/** Retrieve & dispatch all posts data. */
+/** Retrieve & dispatch all posts titles data. */
 
-export function fetchPostsFromAPI() {
+export function fetchTitlesFromAPI() {
   return async function thunk(dispatch) {
     try {
-      let posts = await axios.get(`${API_URL_POST}/`);
-      let idToPost = arrayToObject(posts.data);
-      dispatch(fetchPosts(idToPost));
+      let titles = await axios.get(`${API_BASE_URL}/`);
+      dispatch(fetchTitles(titles.data));
     } catch (error) {
       dispatch(handleError(error.response.data));
     }
@@ -98,7 +106,7 @@ export function fetchPostsFromAPI() {
 // export function fetchPostCommentsFromAPI(postId) {
 //   return async function thunk(dispatch) {
 //     try {
-//       let comments = await axios.get(`${API_URL_POST}/${postId}/comments`);
+//       let comments = await axios.get(`${API_BASE_URL}/${postId}/comments`);
 //       let idToComment = arrayToObject(comments.data);
 //       dispatch(fetchPostComments(idToComment));
 //     } catch (error) {
@@ -107,13 +115,19 @@ export function fetchPostsFromAPI() {
 //   }
 // }
 
+/** Retrieve & dispatch a single post's data. */
+
 export function fetchPostFromAPI(postId) {
   return async function thunk(dispatch) {
     try {
-      let post = await axios.get(`${API_URL_POST}/${postId}`);
+      let resp = await axios.get(`${API_BASE_URL}/${postId}`);
+      let post = resp.data;
+
       let idToComment = arrayToObject(post.data.comments)
-      post.comments = idToComment;
+      post.idToComment = idToComment;
+      delete post.comments;
       dispatch(fetchPost(post));
+
     } catch (error) {
       dispatch(handleError(error.response.data));
     }
@@ -123,43 +137,54 @@ export function fetchPostFromAPI(postId) {
 export function createPostToAPI(postData) {
   return async function thunk(dispatch) {
     try {
-      let newPost = await axios.post(`${API_URL_POST}`, postData);
-      dispatch(addPost(newPost));
+      let newPost = await axios.post(`${API_BASE_URL}`, postData);
+      dispatch(addPost(newPost.data));
     } catch (error) {
       dispatch(handleError(error.response.data));
     }
   }
 }
 
-export function updatePostToAPI(postData) {
+export function updatePostToAPI(postData, postId) {
   return async function thunk(dispatch) {
     try {
-      let updatedPost = await axios.put(`${API_URL_POST}`, postData);
-      dispatch(updatePost(updatedPost));
+      let updatedPost = await axios.put(`${API_BASE_URL}/${postId}`, postData);
+      dispatch(updatePost(updatedPost.data));
     } catch (error) {
       dispatch(handleError(error.response.data));
     }
   }
 }
 
-export function deletePostFromAPI(id) {
+export function deletePostFromAPI(postId) {
   return async function thunk(dispatch) {
     try {
-      await axios.delete(`${API_URL_POST}/${id}`);
-      dispatch(deletePost(id));
+      await axios.delete(`${API_BASE_URL}/${postId}`);
+      dispatch(deletePost(postId));
     } catch (error) {
       dispatch(handleError(error.response.data));
     }
   };
 }
 
-export function createCommentToAPI(commentData) {
+export function createCommentToAPI(commentData, postId) {
   return async function thunk(dispatch) {
     try {
-      let newComment = await axios.post(`${API_URL_COMMENT}`, commentData);
-      dispatch(getComments(newComment));
+      let newComment = await axios.post(`${API_BASE_URL}/${postId}/comments`, commentData);
+      dispatch(addComment(newComment.data));
     } catch (error) {
       dispatch(handleError(error.response.data));
+    }
+  }
+}
+
+export function deleteCommentFromAPI(commentId, postId) {
+  return async function thunk(dispatch) {
+    try {
+      await axios.delete(`${API_BASE_URL}/${postId}/comments/${commentId}`);
+      dispatch(deleteComment(commentId, postId));
+    } catch (error) {
+      dispatch(handleError(error.response.data))
     }
   }
 }
