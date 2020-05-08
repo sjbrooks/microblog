@@ -38,10 +38,12 @@ function rootReducer(state = DEFAULT_STATE, action) {
     case UPDATE_POST:
       let reformattedUpdatedPost = { ...action.updatedPost };
       delete reformattedUpdatedPost.id;
-      return {...state, idToPost: { ...state.idToPost, [action.updatedPost.id]: reformattedUpdatedPost } }
+      return { ...state, idToPost: { ...state.idToPost, [action.updatedPost.id]: reformattedUpdatedPost } }
 
     case DELETE_POST:
-      return {}
+      let idToPostCopy = { ...state.idToPost }
+      delete idToPostCopy.action.id;
+      return { ...state, idToPost: { ...idToPostCopy } };
 
     case ADD_COMMENT:
       return {}
